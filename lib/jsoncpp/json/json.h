@@ -226,7 +226,11 @@ license you like.
 
 #elif defined __GNUC__ // not clang (gcc comes later since clang emulates gcc)
 #if defined(__GXX_EXPERIMENTAL_CXX0X__) || (__cplusplus >= 201103L)
+#if (__GNUC__ == 4 && (__GNUC_MINOR__ < 8 || __GNUC_MINOR__ == 8))
+#define JSON_HAS_RVALUE_REFERENCES 0
+#else
 #define JSON_HAS_RVALUE_REFERENCES 1
+#endif
 #endif  // GXX_EXPERIMENTAL
 
 #endif // __clang__ || __GNUC__
