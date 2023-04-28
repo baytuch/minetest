@@ -210,7 +210,7 @@ find_package(Lua REQUIRED)
 
 # JsonCPP doesn't compile well on GCC 4.8
 if(NOT ENABLE_SYSTEM_JSONCPP)
-	set(GCC_MINIMUM_VERSION "4.9")
+	set(GCC_MINIMUM_VERSION "4.8")
 endif()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
