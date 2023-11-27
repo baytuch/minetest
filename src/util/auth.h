@@ -23,6 +23,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 std::string translate_password(const std::string &name,
 	const std::string &password);
 
+/// The strict format for nicknames.
+bool name_checker(const std::string &name);
+
 /// Creates a verification key with given salt and password.
 std::string generate_srp_verifier(const std::string &name,
 	const std::string &password, const std::string &salt);

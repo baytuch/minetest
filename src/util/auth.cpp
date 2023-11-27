@@ -46,6 +46,38 @@ std::string translate_password(const std::string &name,
 	return pwd;
 }
 
+// The strict format for nicknames.
+// Pattern: [A-Z]: 1, [a-z]: 3-7, [0-9]: 0-2
+bool name_checker(const std::string &name)
+{
+	const size_t len_zero = 2;
+	const size_t len_max = 1 + 7 + len_zero;
+	const size_t len_min = 1 + 3;
+	const size_t len_name = name.length();
+	bool res = true;
+	bool zero_t = false;
+	char c = '\0';
+
+	if (len_name < len_min || len_name > len_max) res = false;
+
+	for (size_t n = 0; n < len_name && res; n++)
+	{
+		c = name[n];
+		if (!n && (c < 'A' || c > 'Z')) res = false;
+		else
+		{
+			bool zero = false;
+			if (n >= len_name - len_zero)
+			{
+				if (c >= '0' && c <= '9') { zero = true; zero_t = true; }
+				else if (n >= len_max - len_zero) res = false;
+			}
+			if (!((c >= 'a' && c <= 'z' && !zero_t) || zero)) res = false;
+		}
+	}
+	return res;
+}
+
 // Call lower level SRP code to generate a verifier with the
 // given pointers. Contains the preparations, call parameters
 // and error checking common to all srp verifier generation code.

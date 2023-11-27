@@ -1503,6 +1503,13 @@ void Server::handleCommand_FirstSrp(NetworkPacket* pkt)
 			return;
 		}
 
+		if (!name_checker(playername)) {
+			actionstream << "Server: " << playername
+					<< " is incorrect login from " << addr_s << std::endl;
+			DenyAccess(peer_id, SERVER_ACCESSDENIED_WRONG_NAME);
+			return;
+		}
+
 		if (!isSingleplayer() &&
 				g_settings->getBool("disallow_empty_password") &&
 				is_empty == 1) {
