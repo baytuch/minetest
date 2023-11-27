@@ -64,7 +64,7 @@ bool name_checker(const std::string &name)
 	{
 		c = name[n];
 		if (!n && (c < 'A' || c > 'Z')) res = false;
-		else
+		if (n)
 		{
 			bool zero = false;
 			if (n >= len_name - len_zero)
